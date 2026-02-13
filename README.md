@@ -2,19 +2,21 @@
 
 ## Car Price Prediction
 
-### Описание смысла модели:
+[![ru](https://img.shields.io/badge/README_на_русском-2A2C39?style=for-the-badge&logo=github&logoColor=white)](README.ru.md)
 
-Заказчик работает в компании, которая занимается продажей подержанных автомобилей.  **Основная цель**  - построить модель машинного обучения, которая сможет предсказать стоимость автомобиля на основе его характеристик. Это поможет компании более точно оценивать автомобили и предлагать клиентам справедливые цены.
+### Description of the model's purpose:
 
-### Основная информация:
+The customer works for a company that sells used cars. The **main goal**  is to build a machine learning model that can predict the value of a car based on its characteristics. This will help the company to evaluate cars more accurately and offer fair prices to customers.
 
-В коде используется датасет **[Car Price Dataset](https://www.google.com/url?q=https://www.kaggle.com/datasets/asinow/car-price-dataset/data)**.  Для наших данных построим матрицу корреляции **PhiK** и для наглядности создадим тепловую карту для нее.
+### Basic information:
 
-Для обучения модели будем использовать бустинг **XGBoost**. **XGBoost** - это одна из самых популярных и мощных библиотек для задач машинного обучения, основанная на алгоритме градиентного бустинга. Она широко используется для задач классификации, регрессии и ранжирования, благодаря своей высокой производительности, точности и гибкости. **XGBoost** — это реализация градиентного бустинга, которая использует ансамбль деревьев решений. 
+The code uses the dataset **[Car Price Dataset](https://www.google.com/url?q=https://www.kaggle.com/datasets/asinow/car-price-dataset/data)**. For our data, we will build a correlation matrix **PhiK** and create a heat map for it.
 
-Также мы перебираем все заданные комбинации гиперпараметров в сетке и выбираем те, которые дают наилучшее качество модели на кросс-валидации. В этом поможет **GridSearchCV** — это инструмент из библиотеки **scikit-learn**, который используется для автоматического подбора оптимальных гиперпараметров модели:
+We will use **XGBoost** boosting to train the model. **XGBoost** is one of the most popular and powerful libraries for machine learning tasks, based on the gradient boosting algorithm. It is widely used for classification, regression, and ranking tasks due to its high performance, accuracy, and flexibility. **XGBoost** is a gradient boosting implementation that uses an ensemble of decision trees. 
 
-    param_grid = {  #задаем сетку гиперпараметров
+Also, we iterate over all the given combinations of hyperparameters in the grid and select those that give the best model quality on cross-validation. This is where **GridSearchCV** comes in handy - it is a tool from the **scikit-learn** library that is used to automatically select the optimal model hyperparameters:
+
+    param_grid = {  #setting a grid of hyperparameters
 			    'n_estimators':  [100,  200],
 			    'learning_rate':  [0.1,  0.05],
 				'max_depth':  [4,  5]
@@ -28,5 +30,5 @@
 			    n_jobs=-1
     )
 
-    grid_search.fit(X_train, y_train)  #обучаем модель с помощью GridSearchCV
-    print("Лучшие параметры: ", grid_search.best_params_)  #выводим лучшие параметры
+    grid_search.fit(X_train, y_train)  #train the model using GridSearchCV
+    print("The best parameters: ", grid_search.best_params_)  #output the best parameters
